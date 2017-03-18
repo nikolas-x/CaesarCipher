@@ -1,7 +1,8 @@
 import sys
 
-def main():
 
+def main():
+    # Take in the shift value and the text
     try:
         shift = int(input('Shift value: '))
         text = str(input('Text: '))
@@ -10,7 +11,20 @@ def main():
         sys.exit(1)
 
     # Debug
-    print("Shift: " + str(shift))
-    print("Text: " + text)
+    table = build_translation_table(shift)
+    print(table)
 
-if __name__ == "__main__" : main()
+# Generates a table containing each letter of the alphabet shifted by the given shift value
+def build_translation_table(shift):
+    table = []
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alphabet_list = list(alphabet)
+
+    for i in range(0,26):
+        table.append(alphabet[(i + shift) % 26])
+
+    return table
+
+
+if __name__ == "__main__":
+    main()
