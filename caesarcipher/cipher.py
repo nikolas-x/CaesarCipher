@@ -1,6 +1,5 @@
 import sys
 
-
 def main():
     # Take in the shift value and the text
     try:
@@ -10,20 +9,20 @@ def main():
         print("Invalid input.")
         sys.exit(1)
 
-    # Debug
     table = build_translation_table(shift)
-    print(table)
+    ciphered = text.upper().translate(table)
+    print(ciphered)
 
 # Generates a table containing each letter of the alphabet shifted by the given shift value
 def build_translation_table(shift):
-    table = []
+    key = []
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     alphabet_list = list(alphabet)
 
     for i in range(0,26):
-        table.append(alphabet[(i + shift) % 26])
+        key.append(alphabet[(i + shift) % 26])
 
-    return table
+    return str.maketrans(alphabet, ''.join(key))
 
 
 if __name__ == "__main__":
