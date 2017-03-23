@@ -49,6 +49,7 @@ def build_translation_table(shift):
     return str.maketrans(alphabet, ''.join(key))
 
 
+# Ciphers a line with the given translation table
 def cipher(table, line):
     return line.upper().translate(table)
 
