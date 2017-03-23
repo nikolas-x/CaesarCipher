@@ -33,8 +33,31 @@ def main():
         sys.exit(1)
 
     combinedText = '\n'.join(text)
+    charmap = count_chars(combinedText)
     print(combinedText)
+    print(charmap)
 
+
+def count_chars(text):
+    text = text.upper()
+    charmap = {}
+    escape = False
+    for c in text:
+        if c == '\\':
+            escape = True
+            continue
+
+        if escape:
+            escape = False
+            continue
+
+        if c.isalpha():
+            if c in charmap:
+                charmap[c] += 1
+            else:
+                charmap[c] = 1
+
+    return charmap
 
 if __name__ == "__main__":
     main()
