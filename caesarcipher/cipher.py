@@ -1,7 +1,8 @@
 import sys
 from caesarcipher.cipher_utils import translation_table_to_string
 from caesarcipher.cipher_utils import count_chars
-
+from caesarcipher.cipher_utils import build_translation_table
+from caesarcipher.cipher_utils import translate
 
 def main():
     # Take in the shift value and the text
@@ -41,25 +42,8 @@ def main():
     table = build_translation_table(shift)
     print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     print(*translation_table_to_string(table), sep='\n')
-    ciphered = [cipher(table, line) for line in text]
+    ciphered = [translate(table, line) for line in text]
     print(*ciphered, sep='\n')
-
-
-# Generates a table containing each letter of the alphabet shifted by the given shift value
-def build_translation_table(shift):
-    key = []
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    alphabet_list = list(alphabet)
-
-    for i in range(0,26):
-        key.append(alphabet[(i + shift) % 26])
-
-    return str.maketrans(alphabet, ''.join(key))
-
-
-# Ciphers a line with the given translation table
-def cipher(table, line):
-    return line.upper().translate(table)
 
 
 if __name__ == "__main__":

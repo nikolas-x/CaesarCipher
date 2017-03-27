@@ -26,3 +26,33 @@ def count_chars(text):
                 charmap[c] = 1
 
     return charmap
+
+
+def count_shifts(table):
+    shiftmap = {}
+    print(table)
+    for k,v in table.items():
+        shift = abs(int(k) - int(v))
+        if shift in shiftmap:
+            shiftmap[shift] += 1
+        else:
+            shiftmap[shift] = 1
+    return shiftmap
+
+
+# Generates a table containing each letter of the alphabet shifted by the given shift value
+def build_translation_table(shift):
+    key = []
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alphabet_list = list(alphabet)
+
+    for i in range(0,26):
+        key.append(alphabet[(i + shift) % 26])
+
+    return str.maketrans(alphabet, ''.join(key))
+
+
+# Translates a line with the given translation table
+def translate(table, line):
+    return line.upper().translate(table)
+
