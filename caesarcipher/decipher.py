@@ -1,5 +1,7 @@
 import sys
 import operator
+from caesarcipher.cipher_utils import translation_table_to_string
+from caesarcipher.cipher_utils import count_chars
 
 
 def main():
@@ -48,33 +50,16 @@ def main():
 
     sorted_chars_actual = sorted_chars_actual[:len(sorted_chars_expected)]
 
+    print(sorted_chars_expected)
+    print(charmap)
+    print(sorted_chars_actual)
+
+
     # Build translation table and translate text
-    table = str.maketrans(sorted_chars_expected, sorted_chars_actual)
+    table = str.maketrans(sorted_chars_actual, sorted_chars_expected)
+    print(*translation_table_to_string(table), sep='\n')
     deciphered = [decipher(table, line) for line in text]
     print(*deciphered, sep='\n')
-
-
-# Generate a map of character counts for alphabetic characters
-def count_chars(text):
-    text = text.upper()
-    charmap = {}
-    escape = False
-    for c in text:
-        if c == '\\':
-            escape = True
-            continue
-
-        if escape:
-            escape = False
-            continue
-
-        if c.isalpha():
-            if c in charmap:
-                charmap[c] += 1
-            else:
-                charmap[c] = 1
-
-    return charmap
 
 
 def decipher(table, line):

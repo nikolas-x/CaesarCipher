@@ -1,4 +1,6 @@
 import sys
+from caesarcipher.cipher_utils import translation_table_to_string
+from caesarcipher.cipher_utils import count_chars
 
 
 def main():
@@ -32,7 +34,13 @@ def main():
         print("Invalid input.")
         sys.exit(1)
 
+    #debug
+    charmap = count_chars('\n'.join(text))
+    print(charmap)
+
     table = build_translation_table(shift)
+    print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    print(*translation_table_to_string(table), sep='\n')
     ciphered = [cipher(table, line) for line in text]
     print(*ciphered, sep='\n')
 
