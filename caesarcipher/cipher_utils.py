@@ -30,7 +30,6 @@ def count_chars(text):
 
 def count_shifts(table):
     shiftmap = {}
-    print(table)
     for k,v in table.items():
         shift = abs(int(k) - int(v))
         if shift in shiftmap:
